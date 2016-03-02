@@ -1,8 +1,7 @@
 package it.esteco.domain;
 
-import it.esteco.domain.Catalog;
-import it.esteco.domain.Display;
-import it.esteco.domain.PointOfSale;
+import it.esteco.domain.ports.Catalog;
+import it.esteco.domain.ports.Display;
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Before;
@@ -56,5 +55,24 @@ public class PointOfSaleTest {
         pointOfSale.onScannedProduct(new BarCode("Not exists"));
 
         assertThat(cart.size(), is(0));
+    }
+
+    @Test
+    public void returnZeroWhenNoProductInCart() throws Exception {
+        context.checking(new Expectations(){{
+            oneOf(display).showTotal(with(new Money(0)));
+        }});
+        pointOfSale.onTotalRequested();
+    }
+
+    @Test
+    public void returnPriceSumWhenSomeProductsInCart() throws Exception {
+        cart.add(new Money(100));
+        cart.add(new Money(200));
+        context.checking(new Expectations(){{
+            oneOf(display).showTotal(with(new Money(300)));
+        }});
+
+        pointOfSale.onTotalRequested();
     }
 }

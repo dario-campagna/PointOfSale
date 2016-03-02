@@ -1,5 +1,8 @@
 package it.esteco.domain;
 
+import it.esteco.domain.ports.Catalog;
+import it.esteco.domain.ports.Display;
+
 import java.util.List;
 
 public class PointOfSale {
@@ -21,5 +24,13 @@ public class PointOfSale {
         } else {
             cart.add(price);
         }
+    }
+
+    public void onTotalRequested() {
+        Money total = new Money(0);
+        for (Money money : cart) {
+            total = total.add(money);
+        }
+        display.showTotal(total);
     }
 }

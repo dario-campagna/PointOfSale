@@ -13,6 +13,11 @@ public class Money {
     }
 
     @Override
+    public String toString() {
+        return String.valueOf(cents);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -30,5 +35,9 @@ public class Money {
     @Override
     public int hashCode() {
         return cents;
+    }
+
+    public Money add(Money money) {
+        return new Money(cents + money.getCents());
     }
 }
