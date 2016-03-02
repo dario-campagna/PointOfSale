@@ -21,7 +21,7 @@ public class PointOfSaleTest {
     private PointOfSale pointOfSale;
     private Catalog catalog;
     private Display display;
-    private List<Money> cart;
+    private List<Product> cart;
 
     @Before
     public void setUp() throws Exception {
@@ -35,13 +35,14 @@ public class PointOfSaleTest {
     public void addScannedProductToCartWhenProductExists() throws Exception {
         context.checking(new Expectations(){{
             allowing(catalog).findBy(new BarCode("A"));
-            will(returnValue(new Money(100)));
+            will(returnValue(new Product(new Money(100))));
+            oneOf(display).showPrice(new Product(new Money(100)));
         }});
 
         pointOfSale.onScannedProduct(new BarCode("A"));
 
         assertThat(cart.size(), is(1));
-        assertThat(cart.get(0), is(new Money(100)));
+        assertThat(cart.get(0), is(new Product(new Money(100))));
     }
 
     @Test
@@ -67,8 +68,8 @@ public class PointOfSaleTest {
 
     @Test
     public void returnPriceSumWhenSomeProductsInCart() throws Exception {
-        cart.add(new Money(100));
-        cart.add(new Money(200));
+        cart.add(new Product(new Money(100)));
+        cart.add(new Product(new Money(200)));
         context.checking(new Expectations(){{
             oneOf(display).showTotal(with(new Money(300)));
         }});
