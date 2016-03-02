@@ -1,5 +1,5 @@
 package it.esteco.domain;
 
 public interface Display {
-    void showProductNotFound(String barCode );
+    void showProductNotFound(BarCode barCode );
 }

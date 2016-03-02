@@ -1,4 +1,4 @@
-package it.esteco;
+package it.esteco.domain;
 
 import it.esteco.domain.Catalog;
 import it.esteco.domain.Display;
@@ -22,7 +22,7 @@ public class PointOfSaleTest {
     private PointOfSale pointOfSale;
     private Catalog catalog;
     private Display display;
-    private List<Integer> cart;
+    private List<Money> cart;
 
     @Before
     public void setUp() throws Exception {
@@ -35,26 +35,26 @@ public class PointOfSaleTest {
     @Test
     public void addScannedProductToCartWhenProductExists() throws Exception {
         context.checking(new Expectations(){{
-            allowing(catalog).findBy("A");
-            will(returnValue(100));
+            allowing(catalog).findBy(new BarCode("A"));
+            will(returnValue(new Money(100)));
         }});
 
-        pointOfSale.onScannedProduct("A");
+        pointOfSale.onScannedProduct(new BarCode("A"));
 
         assertThat(cart.size(), is(1));
-        assertThat(cart.get(0), is(100));
+        assertThat(cart.get(0), is(new Money(100)));
     }
 
     @Test
     public void displayErrorWhenScannedProductNotExists() throws Exception {
         context.checking(new Expectations(){{
-            allowing(catalog).findBy("Not exists");
+            allowing(catalog).findBy(new BarCode("Not exists"));
             will(returnValue(null));
-            oneOf(display).showProductNotFound("Not exists");
+            oneOf(display).showProductNotFound(new BarCode("Not exists"));
         }});
 
-        pointOfSale.onScannedProduct("Not exists");
-        
+        pointOfSale.onScannedProduct(new BarCode("Not exists"));
+
         assertThat(cart.size(), is(0));
     }
 }
