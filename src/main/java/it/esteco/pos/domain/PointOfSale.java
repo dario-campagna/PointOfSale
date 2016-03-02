@@ -1,8 +1,8 @@
-package it.esteco.domain;
+package it.esteco.pos.domain;
 
-import it.esteco.domain.ports.Catalog;
-import it.esteco.domain.ports.Display;
-import it.esteco.domain.ports.TaxCalculator;
+import it.esteco.pos.domain.ports.Catalog;
+import it.esteco.pos.domain.ports.Display;
+import it.esteco.pos.domain.ports.TaxCalculator;
 
 import java.util.List;
 

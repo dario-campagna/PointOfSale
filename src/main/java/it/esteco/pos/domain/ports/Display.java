@@ -1,8 +1,8 @@
-package it.esteco.domain.ports;
+package it.esteco.pos.domain.ports;
 
-import it.esteco.domain.BarCode;
-import it.esteco.domain.Money;
-import it.esteco.domain.Product;
+import it.esteco.pos.domain.BarCode;
+import it.esteco.pos.domain.Money;
+import it.esteco.pos.domain.Product;
 
 public interface Display {
     void showProductNotFound(BarCode barCode );

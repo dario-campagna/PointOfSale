@@ -1,6 +1,10 @@
-package it.esteco.domain;
+package it.esteco.pos.domain;
 
 public class MessageFormat {
+
+    public String formatProductNotFound(BarCode barCode) {
+        return "Product not found: " + barCode.getCode();
+    }
 
     public String formatPrice(Money money) {
         return "CAD " + formatMoney(money);

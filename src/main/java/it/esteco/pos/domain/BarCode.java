@@ -1,4 +1,4 @@
-package it.esteco.domain;
+package it.esteco.pos.domain;
 
 public class BarCode {
 
@@ -6,6 +6,10 @@ public class BarCode {
 
     public BarCode(String code) {
         this.code = code;
+    }
+
+    public String getCode() {
+        return code;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package it.esteco.domain;
+package it.esteco.pos.domain;
 
 public class Money {
 

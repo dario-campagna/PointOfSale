@@ -1,4 +1,4 @@
-package it.esteco.domain;
+package it.esteco.pos.domain;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +13,11 @@ public class MessageFormatTest {
     @Before
     public void setUp() throws Exception {
         messageFormat = new MessageFormat();
+    }
+
+    @Test
+    public void productNotFound() throws Exception {
+        assertThat(messageFormat.formatProductNotFound(new BarCode("XXX")), is("Product not found: XXX"));
     }
 
     @Test
