@@ -2,6 +2,7 @@ package it.esteco.domain;
 
 public class Product {
     private Money price;
+    private boolean provTaxed;
 
     public Product(Money price) {
         this.price = price;
@@ -9,6 +10,10 @@ public class Product {
 
     public Money getPrice() {
         return price;
+    }
+
+    public boolean isProvTaxed() {
+        return provTaxed;
     }
 
     @Override

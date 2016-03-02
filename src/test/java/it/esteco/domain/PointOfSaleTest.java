@@ -2,6 +2,7 @@ package it.esteco.domain;
 
 import it.esteco.domain.ports.Catalog;
 import it.esteco.domain.ports.Display;
+import it.esteco.domain.ports.TaxCalculator;
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Before;
@@ -22,13 +23,15 @@ public class PointOfSaleTest {
     private Catalog catalog;
     private Display display;
     private List<Product> cart;
+    private TaxCalculator taxCalculator;
 
     @Before
     public void setUp() throws Exception {
         cart = new ArrayList<>();
         catalog = context.mock(Catalog.class);
         display = context.mock(Display.class);
-        pointOfSale = new PointOfSale(cart, catalog, display);
+        taxCalculator = context.mock(TaxCalculator.class);
+        pointOfSale = new PointOfSale(cart, catalog, display, taxCalculator);
     }
 
     @Test
@@ -69,9 +72,11 @@ public class PointOfSaleTest {
     @Test
     public void returnPriceSumWhenSomeProductsInCart() throws Exception {
         cart.add(new Product(new Money(100)));
-        cart.add(new Product(new Money(200)));
+        cart.add(new Product(new Money(100)));
         context.checking(new Expectations(){{
-            oneOf(display).showTotal(with(new Money(300)));
+            allowing(taxCalculator).getTaxes(with(any(Product.class)));
+            will(returnValue(new Money(5)));
+            oneOf(display).showTotal(with(new Money(210)));
         }});
 
         pointOfSale.onTotalRequested();
