@@ -1,11 +1,17 @@
 package it.esteco.domain;
 
 public class Product {
+
     private Money price;
     private boolean provTaxed;
 
     public Product(Money price) {
         this.price = price;
+    }
+
+    public Product(Money price, boolean provTaxed) {
+        this.price = price;
+        this.provTaxed = provTaxed;
     }
 
     public Money getPrice() {
