@@ -12,6 +12,14 @@ public class Money {
         return cents;
     }
 
+    public Money add(Money money) {
+        return new Money(cents + money.getCents());
+    }
+
+    public Money percentage(int value) {
+        return new Money(cents/100 * value);
+    }
+
     @Override
     public String toString() {
         return String.valueOf(cents);
@@ -30,14 +38,6 @@ public class Money {
 
         return cents == money.cents;
 
-    }
-
-    public Money add(Money money) {
-        return new Money(cents + money.getCents());
-    }
-
-    public Money percentage(int value) {
-        return new Money(cents/100 * value);
     }
 
     @Override

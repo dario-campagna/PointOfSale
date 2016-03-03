@@ -42,7 +42,7 @@ public class PointOfSaleApp extends Application {
         grid.add(totalBtn, 0, 2);
         grid.add(priceDisplay, 1, 2);
 
-        Scene scene = new Scene(grid, 600, 300);
+        Scene scene = new Scene(grid, 400, 200);
 
         primaryStage.setTitle("Point of Sale");
         primaryStage.setScene(scene);
