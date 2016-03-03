@@ -1,0 +1,1 @@
+Point of Sale implementation using TDD and design principles.
