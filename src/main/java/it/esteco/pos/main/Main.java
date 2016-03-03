@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        PointOfSale pointOfSale = new PointOfSaleFactory().create();
+        PointOfSale pointOfSale = new PointOfSaleFactory().consolePOS();
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         while (true) {
             displayMenu();
@@ -36,7 +36,7 @@ public class Main {
     }
 
     private static void displayMenu() {
-        System.out.println("------------------------");
+        System.out.println("\n------------------------");
         System.out.println("Welcome to Point of Sale");
         System.out.println("1) Scan a product");
         System.out.println("2) Display total");
